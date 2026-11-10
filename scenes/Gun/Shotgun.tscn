@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://1k0jrymcjirr"]
+
+[ext_resource type="Script" uid="uid://drtpj1boewydk" path="res://scripts/weapons/weapon_base.gd" id="1_s6bea"]
+[ext_resource type="PackedScene" uid="uid://b7uo1ylhw1voy" path="res://scenes/bullet.tscn" id="2_11fcs"]
+
+[node name="Shotgun" type="Node3D" unique_id=795273846]
+script = ExtResource("1_s6bea")
+damage = 15.0
+fire_rate = 0.8
+bullet_scene = ExtResource("2_11fcs")

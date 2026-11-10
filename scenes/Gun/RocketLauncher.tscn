@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://dhkqjs3uvdtqy"]
+
+[ext_resource type="Script" uid="uid://drtpj1boewydk" path="res://scripts/weapons/weapon_base.gd" id="1_lfbbp"]
+[ext_resource type="PackedScene" uid="uid://b7uo1ylhw1voy" path="res://scenes/bullet.tscn" id="2_k3dj1"]
+
+[node name="RocketLauncher" type="Node3D" unique_id=1925205271]
+script = ExtResource("1_lfbbp")
+is_rocket = true
+damage = 80.0
+fire_rate = 1.5
+bullet_scene = ExtResource("2_k3dj1")

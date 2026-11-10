@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://crgq4pba2fse0"]
+
+[ext_resource type="Script" uid="uid://cdeyyic83jbfr" path="res://scripts/weapons/weapon_pickup.gd" id="1_4c0k1"]
+[ext_resource type="PackedScene" uid="uid://1k0jrymcjirr" path="res://scenes/Gun/Shotgun.tscn" id="2_cxdhy"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_7wyj4"]
+radius = 1.714
+
+[sub_resource type="BoxMesh" id="BoxMesh_4c0k1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cxdhy"]
+emission_enabled = true
+emission = Color(0.26977795, 0.97005206, 0.02652486, 1)
+emission_energy_multiplier = 3.12
+
+[node name="WeaponPickup" type="Area3D" unique_id=92901606]
+script = ExtResource("1_4c0k1")
+weapon_scene = ExtResource("2_cxdhy")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=823608991]
+shape = SubResource("SphereShape3D_7wyj4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1005694441]
+mesh = SubResource("BoxMesh_4c0k1")
+surface_material_override/0 = SubResource("StandardMaterial3D_cxdhy")

@@ -1,0 +1,99 @@
+[gd_scene format=3 uid="uid://x0v5h21f6utx"]
+
+[ext_resource type="Script" uid="uid://dycuaq5ihl334" path="res://scripts/player/state_machine.gd" id="1_1jxqw"]
+[ext_resource type="Script" uid="uid://d0et08s5w7jee" path="res://scripts/player/player.gd" id="1_dw050"]
+[ext_resource type="Script" uid="uid://b2ptj62tbmot2" path="res://scripts/player/state_idle.gd" id="2_dw050"]
+[ext_resource type="Script" uid="uid://b6lhk36y4goq4" path="res://scripts/weapons/machine_gun.gd" id="2_y4r1p"]
+[ext_resource type="Script" uid="uid://b211j2r2u2iwm" path="res://scripts/player/state_run.gd" id="3_b26j0"]
+[ext_resource type="PackedScene" uid="uid://b7uo1ylhw1voy" path="res://scenes/bullet.tscn" id="3_d2wvv"]
+[ext_resource type="Script" uid="uid://ybny01ngo2ma" path="res://scripts/autoload/TimerLabel.gd" id="4_d2wvv"]
+[ext_resource type="Script" uid="uid://dfnobsewwkvbm" path="res://scripts/player/state_slide.gd" id="4_n7ghd"]
+[ext_resource type="Script" uid="uid://cu45onb2hqlaj" path="res://scripts/player/state_air.gd" id="6_dw050"]
+[ext_resource type="Script" uid="uid://b5mvdw55rre6v" path="res://scripts/player/state_wall.gd" id="7_dw050"]
+[ext_resource type="Script" uid="uid://bb5f0fagyv8oj" path="res://scripts/player/state_chain.gd" id="7_urp6f"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sh265"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_4flbx"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_smehm"]
+size = Vector3(0.30273438, 0.2732544, 1.3222046)
+
+[node name="player" type="CharacterBody3D" unique_id=451295130 groups=["player"]]
+script = ExtResource("1_dw050")
+run_speed = 15.0
+jump_velocity = 10.0
+max_wall_jumps = 3
+
+[node name="RayRight" type="RayCast3D" parent="." unique_id=1368984735]
+target_position = Vector3(0.6, 0, 0)
+
+[node name="RayLeft" type="RayCast3D" parent="." unique_id=1162943674]
+target_position = Vector3(-0.6, -1, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=625241243]
+shape = SubResource("CapsuleShape3D_sh265")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=146302924]
+layers = 3
+gi_mode = 2
+mesh = SubResource("CapsuleMesh_4flbx")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=114460755]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4519806, -0.32020622)
+current = true
+
+[node name="ChainRay" type="RayCast3D" parent="Camera3D" unique_id=686026844]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.262562e-05, 0.32020622)
+target_position = Vector3(0, 0, -50)
+
+[node name="CenterContainer" type="CenterContainer" parent="Camera3D" unique_id=1866218889]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="Camera3D/CenterContainer" unique_id=335696424]
+custom_minimum_size = Vector2(4, 4)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="WeaponSlot" type="Node3D" parent="Camera3D" unique_id=1460046704]
+script = ExtResource("2_y4r1p")
+bullet_scene = ExtResource("3_d2wvv")
+
+[node name="gun" type="MeshInstance3D" parent="Camera3D/WeaponSlot" unique_id=619952088]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3486328, -0.3419037, -0.33906502)
+layers = 3
+mesh = SubResource("BoxMesh_smehm")
+
+[node name="TimerLabel" type="Label" parent="Camera3D" unique_id=31832006]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 86
+text = "8.0"
+script = ExtResource("4_d2wvv")
+
+[node name="StateMachine" type="Node" parent="." unique_id=465673144]
+script = ExtResource("1_1jxqw")
+
+[node name="Idle" type="Node" parent="StateMachine" unique_id=1513711457]
+script = ExtResource("2_dw050")
+
+[node name="Run" type="Node" parent="StateMachine" unique_id=1290033409]
+script = ExtResource("3_b26j0")
+
+[node name="Slide" type="Node" parent="StateMachine" unique_id=2055498872]
+script = ExtResource("4_n7ghd")
+slide_impulse = 20.0
+
+[node name="Air" type="Node" parent="StateMachine" unique_id=2122186566]
+script = ExtResource("6_dw050")
+
+[node name="Wall" type="Node" parent="StateMachine" unique_id=1104074868]
+script = ExtResource("7_dw050")
+
+[node name="Chain" type="Node" parent="StateMachine" unique_id=332088012]
+script = ExtResource("7_urp6f")

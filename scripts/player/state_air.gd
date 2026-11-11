@@ -1,8 +1,8 @@
 extends State
 
-@export var wall_jump_push: float = 8.0
-@export var wall_jump_up: float = 8.0
-@export var wall_slide_speed: float = 2.0
+@export var wall_jump_push: float = 4
+@export var wall_jump_up: float = 15
+@export var wall_slide_speed: float = 1.2
 
 func enter() -> void:
 	player.camera.position.y = player.default_camera_y

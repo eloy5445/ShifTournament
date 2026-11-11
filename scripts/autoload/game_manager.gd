@@ -5,7 +5,7 @@ signal jugador_muere()
 
 var tiempo_maximo: float = 8.0
 var tiempo_actual: float = 8.0
-var juego_activo: bool = true
+var juego_activo: bool = false
 
 func _process(delta: float) -> void:
 	if not juego_activo:

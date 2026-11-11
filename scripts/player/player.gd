@@ -13,8 +13,11 @@ class_name Player
 @export var max_wall_jumps: int = 2
 var current_wall_jumps: int = 0
 
-# --- Cámara ---
+# --- Cámara y Efectos ---
 @export var mouse_sensitivity: float = 0.002
+@export var base_fov: float = 75.0   # FOV normal
+@export var max_fov: float = 95.0    # FOV al correr (siente la velocidad)
+@export var fov_speed: float = 6.0   # Qué tan rápido cambia el FOV
 
 # --- Nodos ---
 @onready var camera: Camera3D = $Camera3D
@@ -78,6 +81,16 @@ func _physics_process(delta: float) -> void:
 			current_weapon.use_weapon(self, target_pos, true)
 
 	move_and_slide()
+
+	# --- EFECTO DE VELOCIDAD (FOV DINÁMICO) ---
+	# Calculamos qué tan rápido nos movemos en el plano XZ (ignorando la caída)
+	var current_speed = Vector2(velocity.x, velocity.z).length()
+	
+	# Calculamos el FOV objetivo: Si vamos a tope, usa max_fov. Si estamos quietos, usa base_fov.
+	var target_fov = lerp(base_fov, max_fov, current_speed / run_speed)
+	
+	# Aplicamos el efecto suavemente a la cámara
+	camera.fov = lerp(camera.fov, target_fov, fov_speed * delta)
 
 func detect_wall() -> bool:
 	return ray_right.is_colliding() or ray_left.is_colliding()

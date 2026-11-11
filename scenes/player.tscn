@@ -20,10 +20,14 @@
 size = Vector3(0.30273438, 0.2732544, 1.3222046)
 
 [node name="player" type="CharacterBody3D" unique_id=451295130 groups=["player"]]
+collision_layer = 3
 script = ExtResource("1_dw050")
 run_speed = 15.0
-jump_velocity = 10.0
+friction = 40.0
+jump_velocity = 12.0
 max_wall_jumps = 3
+max_fov = 85.0
+fov_speed = 8.0
 
 [node name="RayRight" type="RayCast3D" parent="." unique_id=1368984735]
 target_position = Vector3(0.6, 0, 0)
@@ -67,6 +71,7 @@ bullet_scene = ExtResource("3_d2wvv")
 [node name="gun" type="MeshInstance3D" parent="Camera3D/WeaponSlot" unique_id=619952088]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3486328, -0.3419037, -0.33906502)
 layers = 3
+gi_mode = 2
 mesh = SubResource("BoxMesh_smehm")
 
 [node name="TimerLabel" type="Label" parent="Camera3D" unique_id=31832006]

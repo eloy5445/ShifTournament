@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://d3j1bf16mjha0"]
+
+[ext_resource type="Script" uid="uid://jrdfy6r8xl4q" path="res://scripts/Enemies/target_dummy.gd" id="1_hba5c"]
+[ext_resource type="PackedScene" uid="uid://dkwr7ei2qvjey" path="res://scenes/Gun/Sniper.tscn" id="2_hba5c"]
+[ext_resource type="Script" uid="uid://drtpj1boewydk" path="res://scripts/weapons/weapon_base.gd" id="3_p2woq"]
+[ext_resource type="PackedScene" uid="uid://cqdltb5rr5hce" path="res://scenes/SniperBullet.tscn" id="4_hba5c"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wl4x5"]
+radius = 0.522
+height = 2.008
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_olpmc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xdvfk"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ftd75"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_hba5c"]
+
+[node name="TargetDummy" type="CharacterBody3D" unique_id=1606026715 groups=["enemies"]]
+script = ExtResource("1_hba5c")
+cooldown_time = 2.2
+arma_que_suelta = ExtResource("2_hba5c")
+preferred_distance = 30.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=332601597]
+shape = SubResource("CapsuleShape3D_wl4x5")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=215311235]
+layers = 3
+mesh = SubResource("CapsuleMesh_olpmc")
+surface_material_override/0 = SubResource("StandardMaterial3D_xdvfk")
+
+[node name="VisionRay" type="RayCast3D" parent="." unique_id=1345118270]
+target_position = Vector3(0, 0, -30)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="VisionRay" unique_id=1155959036]
+transform = Transform3D(0.3817281, 0, 0, 0, 0.3817281, 0, 0, 0, 2.64846, 0.19038111, 0, -1.3436341)
+mesh = SubResource("BoxMesh_ftd75")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="VisionRay" unique_id=1763962324]
+transform = Transform3D(0.3571084, 0, 0, 0, -1.5609706e-08, -0.3571084, 0, 0.3571084, -1.5609706e-08, 0.19038111, 0.33913803, -1.3436341)
+mesh = SubResource("CylinderMesh_hba5c")
+
+[node name="WeaponSlot" type="Node3D" parent="." unique_id=297415593]
+script = ExtResource("3_p2woq")
+bullet_scene = ExtResource("4_hba5c")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=687345399]
+path_desired_distance = 1.5

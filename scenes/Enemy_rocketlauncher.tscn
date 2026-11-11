@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://crif335omhege"]
+
+[ext_resource type="Script" uid="uid://jrdfy6r8xl4q" path="res://scripts/Enemies/target_dummy.gd" id="1_ib7ce"]
+[ext_resource type="Script" uid="uid://drtpj1boewydk" path="res://scripts/weapons/weapon_base.gd" id="2_oi6bo"]
+[ext_resource type="PackedScene" uid="uid://dhkqjs3uvdtqy" path="res://scenes/Gun/RocketLauncher.tscn" id="2_pus36"]
+[ext_resource type="PackedScene" uid="uid://b7uo1ylhw1voy" path="res://scenes/bullet.tscn" id="3_pus36"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wl4x5"]
+radius = 0.522
+height = 2.008
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_olpmc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xdvfk"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_oi6bo"]
+
+[node name="TargetDummy" type="CharacterBody3D" unique_id=1606026715 groups=["enemies"]]
+script = ExtResource("1_ib7ce")
+cooldown_time = 3.0
+arma_que_suelta = ExtResource("2_pus36")
+preferred_distance = 15.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=332601597]
+shape = SubResource("CapsuleShape3D_wl4x5")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=215311235]
+layers = 3
+mesh = SubResource("CapsuleMesh_olpmc")
+surface_material_override/0 = SubResource("StandardMaterial3D_xdvfk")
+
+[node name="VisionRay" type="RayCast3D" parent="." unique_id=1345118270]
+target_position = Vector3(0, 0, -30)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="VisionRay" unique_id=1819473323]
+transform = Transform3D(0.6525048, 0, 0, 0, -2.852189e-08, -0.6525048, 0, 0.6525048, -2.852189e-08, 0.34254646, 0.16745532, -0.84898543)
+mesh = SubResource("CylinderMesh_oi6bo")
+
+[node name="WeaponSlot" type="Node3D" parent="." unique_id=297415593]
+script = ExtResource("2_oi6bo")
+bullet_scene = ExtResource("3_pus36")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=687345399]
+path_desired_distance = 1.5

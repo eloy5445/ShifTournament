@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://dkwr7ei2qvjey"]
+
+[ext_resource type="Script" uid="uid://1x0hdvjed7uu" path="res://scripts/weapons/sniper.gd" id="1_ftftm"]
+[ext_resource type="PackedScene" uid="uid://cqdltb5rr5hce" path="res://scenes/SniperBullet.tscn" id="2_imj2n"]
+[ext_resource type="Script" uid="uid://cdeyyic83jbfr" path="res://scripts/weapons/weapon_pickup.gd" id="3_imj2n"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_uldyq"]
+radius = 1.2
+
+[sub_resource type="BoxMesh" id="BoxMesh_vyuew"]
+
+[node name="Sniper" type="Node3D" unique_id=1063802052]
+script = ExtResource("1_ftftm")
+bullet_scene = ExtResource("2_imj2n")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=2118443278]
+script = ExtResource("3_imj2n")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=710505978]
+shape = SubResource("SphereShape3D_uldyq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1900163343]
+mesh = SubResource("BoxMesh_vyuew")
+
+[connection signal="body_entered" from="Area3D" to="Area3D" method="_on_body_entered"]
+[connection signal="body_exited" from="Area3D" to="Area3D" method="_on_body_exited"]

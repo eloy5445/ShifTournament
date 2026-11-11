@@ -2,9 +2,27 @@
 
 [ext_resource type="Script" uid="uid://drtpj1boewydk" path="res://scripts/weapons/weapon_base.gd" id="1_s6bea"]
 [ext_resource type="PackedScene" uid="uid://b7uo1ylhw1voy" path="res://scenes/bullet.tscn" id="2_11fcs"]
+[ext_resource type="Script" uid="uid://cdeyyic83jbfr" path="res://scripts/weapons/weapon_pickup.gd" id="3_qyb0i"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_fg2av"]
+radius = 1.2
+
+[sub_resource type="BoxMesh" id="BoxMesh_11fcs"]
 
 [node name="Shotgun" type="Node3D" unique_id=795273846]
 script = ExtResource("1_s6bea")
 damage = 15.0
-fire_rate = 0.8
+fire_rate = 0.7
 bullet_scene = ExtResource("2_11fcs")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=668518734]
+script = ExtResource("3_qyb0i")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=77676396]
+shape = SubResource("SphereShape3D_fg2av")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1945766111]
+mesh = SubResource("BoxMesh_11fcs")
+
+[connection signal="body_entered" from="Area3D" to="Area3D" method="_on_body_entered"]
+[connection signal="body_exited" from="Area3D" to="Area3D" method="_on_body_exited"]

@@ -29,6 +29,9 @@ var default_camera_y: float
 var default_shape_height: float
 var default_shape_y: float
 
+# --- EL ARMA ---
+var current_weapon: Node = null
+
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 var jump_buffer_timer: float = 0.0
 
@@ -37,6 +40,12 @@ func _ready() -> void:
 	default_camera_y = camera.position.y
 	default_shape_height = collision_shape.shape.height
 	default_shape_y = collision_shape.position.y
+	
+	# Guardamos el arma inicial
+	for child in camera.get_children():
+		if child.has_method("use_weapon"):
+			current_weapon = child
+			break
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
@@ -64,11 +73,9 @@ func _physics_process(delta: float) -> void:
 
 	# --- ATAQUE / DISPARO ---
 	if Input.is_action_just_pressed("attack"):
-		for child in camera.get_children():
-			if child.has_method("use_weapon"):
-				var target_pos = camera.global_position + (-camera.global_transform.basis.z * 50.0)
-				child.use_weapon(self, target_pos, true)
-				break
+		if current_weapon:
+			var target_pos = camera.global_position + (-camera.global_transform.basis.z * 50.0)
+			current_weapon.use_weapon(self, target_pos, true)
 
 	move_and_slide()
 

@@ -2,9 +2,11 @@
 
 [ext_resource type="PackedScene" uid="uid://x0v5h21f6utx" path="res://scenes/player.tscn" id="1_e05a3"]
 [ext_resource type="Script" uid="uid://jrdfy6r8xl4q" path="res://scripts/Enemies/target_dummy.gd" id="2_wl4x5"]
-[ext_resource type="PackedScene" uid="uid://crgq4pba2fse0" path="res://scenes/WeaponPickup.tscn" id="3_7ft05"]
-[ext_resource type="Script" uid="uid://b6lhk36y4goq4" path="res://scripts/weapons/machine_gun.gd" id="3_olpmc"]
+[ext_resource type="PackedScene" uid="uid://bt5i7ft0lcggx" path="res://scenes/Gun/MachineGun.tscn" id="3_4ag8t"]
+[ext_resource type="Script" uid="uid://drtpj1boewydk" path="res://scripts/weapons/weapon_base.gd" id="4_7ft05"]
 [ext_resource type="PackedScene" uid="uid://b7uo1ylhw1voy" path="res://scenes/bullet.tscn" id="4_xdvfk"]
+[ext_resource type="PackedScene" uid="uid://1k0jrymcjirr" path="res://scenes/Gun/Shotgun.tscn" id="6_dpxgc"]
+[ext_resource type="PackedScene" uid="uid://dhkqjs3uvdtqy" path="res://scenes/Gun/RocketLauncher.tscn" id="7_dpxgc"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ug7gw"]
 
@@ -121,7 +123,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1964703, 1.5434146, 1.51230
 [node name="TargetDummy" type="StaticBody3D" parent="." unique_id=1188055300 groups=["enemies"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5728583, 2.211624, -7.2498083)
 script = ExtResource("2_wl4x5")
-weapon_scene_to_drop = ExtResource("3_7ft05")
+weapon_scene_to_drop = ExtResource("3_4ag8t")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="TargetDummy" unique_id=1315353855]
 shape = SubResource("CapsuleShape3D_wl4x5")
@@ -135,105 +137,49 @@ surface_material_override/0 = SubResource("StandardMaterial3D_xdvfk")
 target_position = Vector3(0, 0, -30)
 
 [node name="WeaponSlot" type="Node3D" parent="TargetDummy" unique_id=1980993647]
-script = ExtResource("3_olpmc")
+script = ExtResource("4_7ft05")
 bullet_scene = ExtResource("4_xdvfk")
 
-[node name="TargetDummy2" type="StaticBody3D" parent="." unique_id=1807237014 groups=["enemies"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.881952, 2.211624, -4.380149)
+[node name="TargetDummy2" type="StaticBody3D" parent="." unique_id=1740131739 groups=["enemies"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.391338, 2.211624, -7.2498083)
 script = ExtResource("2_wl4x5")
-weapon_scene_to_drop = ExtResource("3_7ft05")
+weapon_scene_to_drop = ExtResource("6_dpxgc")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="TargetDummy2" unique_id=1341081773]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TargetDummy2" unique_id=1912317815]
 shape = SubResource("CapsuleShape3D_wl4x5")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="TargetDummy2" unique_id=1040441858]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="TargetDummy2" unique_id=649045472]
 layers = 3
 mesh = SubResource("CapsuleMesh_olpmc")
 surface_material_override/0 = SubResource("StandardMaterial3D_xdvfk")
 
-[node name="VisionRay" type="RayCast3D" parent="TargetDummy2" unique_id=147523376]
+[node name="VisionRay" type="RayCast3D" parent="TargetDummy2" unique_id=1906743150]
 target_position = Vector3(0, 0, -30)
 
-[node name="WeaponSlot" type="Node3D" parent="TargetDummy2" unique_id=1069937357]
-script = ExtResource("3_olpmc")
+[node name="WeaponSlot" type="Node3D" parent="TargetDummy2" unique_id=477157429]
+script = ExtResource("4_7ft05")
+damage = 15.0
+fire_rate = 0.8
 bullet_scene = ExtResource("4_xdvfk")
 
-[node name="TargetDummy3" type="StaticBody3D" parent="." unique_id=1955726082 groups=["enemies"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.881952, 2.211624, -11.824105)
+[node name="TargetDummy3" type="StaticBody3D" parent="." unique_id=514101881 groups=["enemies"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5025682, 2.211624, -7.2498083)
 script = ExtResource("2_wl4x5")
-weapon_scene_to_drop = ExtResource("3_7ft05")
+weapon_scene_to_drop = ExtResource("7_dpxgc")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="TargetDummy3" unique_id=1864674404]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TargetDummy3" unique_id=1380757395]
 shape = SubResource("CapsuleShape3D_wl4x5")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="TargetDummy3" unique_id=729421246]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="TargetDummy3" unique_id=2061597765]
 layers = 3
 mesh = SubResource("CapsuleMesh_olpmc")
 surface_material_override/0 = SubResource("StandardMaterial3D_xdvfk")
 
-[node name="VisionRay" type="RayCast3D" parent="TargetDummy3" unique_id=1580997777]
+[node name="VisionRay" type="RayCast3D" parent="TargetDummy3" unique_id=135240427]
 target_position = Vector3(0, 0, -30)
 
-[node name="WeaponSlot" type="Node3D" parent="TargetDummy3" unique_id=1144563570]
-script = ExtResource("3_olpmc")
-bullet_scene = ExtResource("4_xdvfk")
-
-[node name="TargetDummy4" type="StaticBody3D" parent="." unique_id=376954270 groups=["enemies"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8532915, 2.211624, -11.824105)
-script = ExtResource("2_wl4x5")
-weapon_scene_to_drop = ExtResource("3_7ft05")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="TargetDummy4" unique_id=134837123]
-shape = SubResource("CapsuleShape3D_wl4x5")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="TargetDummy4" unique_id=2086846084]
-layers = 3
-mesh = SubResource("CapsuleMesh_olpmc")
-surface_material_override/0 = SubResource("StandardMaterial3D_xdvfk")
-
-[node name="VisionRay" type="RayCast3D" parent="TargetDummy4" unique_id=1895843548]
-target_position = Vector3(0, 0, -30)
-
-[node name="WeaponSlot" type="Node3D" parent="TargetDummy4" unique_id=1722025015]
-script = ExtResource("3_olpmc")
-bullet_scene = ExtResource("4_xdvfk")
-
-[node name="TargetDummy5" type="StaticBody3D" parent="." unique_id=245910885 groups=["enemies"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.228327, 2.211624, -11.824105)
-script = ExtResource("2_wl4x5")
-weapon_scene_to_drop = ExtResource("3_7ft05")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="TargetDummy5" unique_id=330128360]
-shape = SubResource("CapsuleShape3D_wl4x5")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="TargetDummy5" unique_id=1777047261]
-layers = 3
-mesh = SubResource("CapsuleMesh_olpmc")
-surface_material_override/0 = SubResource("StandardMaterial3D_xdvfk")
-
-[node name="VisionRay" type="RayCast3D" parent="TargetDummy5" unique_id=723820128]
-target_position = Vector3(0, 0, -30)
-
-[node name="WeaponSlot" type="Node3D" parent="TargetDummy5" unique_id=1236016606]
-script = ExtResource("3_olpmc")
-bullet_scene = ExtResource("4_xdvfk")
-
-[node name="TargetDummy6" type="StaticBody3D" parent="." unique_id=1834295263 groups=["enemies"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.228327, 2.211624, -5.6369624)
-script = ExtResource("2_wl4x5")
-weapon_scene_to_drop = ExtResource("3_7ft05")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="TargetDummy6" unique_id=1642016166]
-shape = SubResource("CapsuleShape3D_wl4x5")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="TargetDummy6" unique_id=1076280713]
-layers = 3
-mesh = SubResource("CapsuleMesh_olpmc")
-surface_material_override/0 = SubResource("StandardMaterial3D_xdvfk")
-
-[node name="VisionRay" type="RayCast3D" parent="TargetDummy6" unique_id=1647149083]
-target_position = Vector3(0, 0, -30)
-
-[node name="WeaponSlot" type="Node3D" parent="TargetDummy6" unique_id=1468840107]
-script = ExtResource("3_olpmc")
+[node name="WeaponSlot" type="Node3D" parent="TargetDummy3" unique_id=1961521636]
+script = ExtResource("4_7ft05")
+damage = 80.0
+fire_rate = 2.0
 bullet_scene = ExtResource("4_xdvfk")

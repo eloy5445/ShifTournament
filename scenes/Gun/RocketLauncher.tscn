@@ -2,10 +2,28 @@
 
 [ext_resource type="Script" uid="uid://drtpj1boewydk" path="res://scripts/weapons/weapon_base.gd" id="1_lfbbp"]
 [ext_resource type="PackedScene" uid="uid://b7uo1ylhw1voy" path="res://scenes/bullet.tscn" id="2_k3dj1"]
+[ext_resource type="Script" uid="uid://cdeyyic83jbfr" path="res://scripts/weapons/weapon_pickup.gd" id="3_vie3k"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_5xuyv"]
+radius = 1.2
+
+[sub_resource type="BoxMesh" id="BoxMesh_k3dj1"]
 
 [node name="RocketLauncher" type="Node3D" unique_id=1925205271]
 script = ExtResource("1_lfbbp")
 is_rocket = true
 damage = 80.0
-fire_rate = 1.5
+fire_rate = 1.0
 bullet_scene = ExtResource("2_k3dj1")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=18367150]
+script = ExtResource("3_vie3k")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=247115781]
+shape = SubResource("SphereShape3D_5xuyv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2076517951]
+mesh = SubResource("BoxMesh_k3dj1")
+
+[connection signal="body_entered" from="Area3D" to="Area3D" method="_on_body_entered"]
+[connection signal="body_exited" from="Area3D" to="Area3D" method="_on_body_exited"]

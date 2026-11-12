@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://c0g4ta1463n2r"]
+
+[ext_resource type="Script" uid="uid://ckx7sa5i203pp" path="res://scripts/Level/Training_Zone/test_dummy.gd" id="1_amttc"]
+[ext_resource type="Script" uid="uid://drtpj1boewydk" path="res://scripts/weapons/weapon_base.gd" id="2_0btni"]
+[ext_resource type="PackedScene" uid="uid://cqdltb5rr5hce" path="res://scenes/SniperBullet.tscn" id="3_2xesr"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wl4x5"]
+radius = 0.522
+height = 2.008
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_olpmc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xdvfk"]
+albedo_color = Color(1, 0, 0, 1)
+
+[node name="TargetDummy" type="StaticBody3D" unique_id=2071369503 groups=["enemies", "test_dummy"]]
+script = ExtResource("1_amttc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=332601597]
+shape = SubResource("CapsuleShape3D_wl4x5")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=215311235]
+layers = 3
+mesh = SubResource("CapsuleMesh_olpmc")
+surface_material_override/0 = SubResource("StandardMaterial3D_xdvfk")
+
+[node name="WeaponSlot" type="Node3D" parent="." unique_id=297415593]
+script = ExtResource("2_0btni")
+bullet_scene = ExtResource("3_2xesr")
+
+[node name="Label3D" type="Label3D" parent="." unique_id=774124931]
+transform = Transform3D(2.0578558, 0, 0, 0, 2.0578558, 0, 0, 0, 2.0578558, 0, 1.3268044, 0)
+modulate = Color(18.892157, 18.892157, 18.892157, 1)
+text = "Practica
+"

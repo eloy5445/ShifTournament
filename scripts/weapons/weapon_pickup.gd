@@ -1,5 +1,8 @@
 extends Area3D
 
+# --- LA NUEVA SEÑAL ---
+signal arma_recogida 
+
 var player_in_area: bool = false
 
 func _ready() -> void:
@@ -12,7 +15,6 @@ func _ready() -> void:
 func _on_body_entered(body: Node3D) -> void:
 	if body is Player:
 		player_in_area = true
-		print("¡JUGADOR DETECTADO! Pulsa Shift.")
 
 func _on_body_exited(body: Node3D) -> void:
 	if body is Player:
@@ -28,22 +30,23 @@ func recoger_arma() -> void:
 	
 	var cam = player.get_node("Camera3D")
 	
-	# Borramos el arma actual del jugador
+	# Borramos el arma actual
 	for child in cam.get_children():
 		if child.has_method("use_weapon"):
 			child.queue_free()
 	
-	# Instanciamos la nueva arma
+	# Cargamos la escena del arma
 	var mi_escena = load(get_parent().scene_file_path)
+	
 	if mi_escena:
 		var nueva_arma = mi_escena.instantiate()
 		cam.add_child(nueva_arma)
 		nueva_arma.name = "WeaponSlot"
 		player.current_weapon = nueva_arma 
 		print("¡Arma recogida!")
+		
+		# --- EMITIMOS LA SEÑAL ---
+		arma_recogida.emit()
 	
-	GameManager.reiniciar_tiempo()
 	
-	# --- LA SOLUCIÓN ---
-	# En lugar de destruir solo el Area3D, destruimos el nodo padre (el arma entera en el suelo)
-	get_parent().queue_free() 
+	get_parent().queue_free()

@@ -1,0 +1,13 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://dwl48ulqpadwr"]
+
+[ext_resource type="Texture2D" uid="uid://4bxs2tmuh4o2" path="res://materiales/templategrid_albedo.png" id="1_8jdmf"]
+
+[resource]
+resource_name = "Material.001"
+cull_mode = 2
+albedo_color = Color(0.41276044, 0.33160573, 0.33160573, 1)
+albedo_texture = ExtResource("1_8jdmf")
+roughness = 0.5
+uv1_triplanar = true
+uv1_world_triplanar = true
+uv2_world_triplanar = true

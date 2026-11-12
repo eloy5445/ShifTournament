@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cvhk5w3rqyroo"
-path="res://.godot/imported/MAP.glb-60ac848bdf7b3c846493bbbf0923a6c4.scn"
+uid="uid://cvy5bmwoihjiq"
+path="res://.godot/imported/Door.glb-d48ef432de624dd83f736502f7ba785d.scn"
 
 [deps]
 
-source_file="res://scenes/Level_game/MAP.glb"
-dest_files=["res://.godot/imported/MAP.glb-60ac848bdf7b3c846493bbbf0923a6c4.scn"]
+source_file="res://assets/Door.glb"
+dest_files=["res://.godot/imported/Door.glb-d48ef432de624dd83f736502f7ba785d.scn"]
 
 [params]
 
@@ -34,7 +34,7 @@ animation/trimming=false
 animation/remove_immutable_tracks=true
 animation/import_rest_as_RESET=false
 import_script/path=""
-materials/extract=1
+materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
 _subresources={}

@@ -5,7 +5,8 @@ signal jugador_muere()
 
 var tiempo_maximo: float = 8.0
 var tiempo_actual: float = 8.0
-var juego_activo: bool = false
+var juego_activo: bool = true
+var permitir_tiempo: bool = false # <-- ¡ESTA ES LA QUE FALTABA!
 
 func _process(delta: float) -> void:
 	if not juego_activo:
@@ -21,14 +22,15 @@ func _process(delta: float) -> void:
 		jugador_muere.emit()
 		print("¡TIEMPO AGOTADO! Reiniciando...")
 		
-		# Esperamos 1 segundo (para que el jugador asimile que perdió)
 		await get_tree().create_timer(1.0).timeout
 		
-		# Reiniciamos el nivel
 		reiniciar_tiempo()
 		get_tree().reload_current_scene()
 
 func reiniciar_tiempo() -> void:
 	tiempo_actual = tiempo_maximo
-	juego_activo = true
 	tiempo_actualizado.emit(tiempo_actual)
+	
+	# Solo encendemos el reloj si el tutorial ya nos dio permiso
+	if permitir_tiempo:
+		juego_activo = true

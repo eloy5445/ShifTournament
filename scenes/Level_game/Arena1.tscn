@@ -1,8 +1,6 @@
 [gd_scene format=3 uid="uid://b7oelqnnov0b3"]
 
 [ext_resource type="PackedScene" uid="uid://x0v5h21f6utx" path="res://scenes/player.tscn" id="2_71afq"]
-[ext_resource type="PackedScene" uid="uid://c6gkw75wlu0ec" path="res://scenes/Level_game/map.tscn" id="2_qcvkh"]
-[ext_resource type="LightmapGIData" uid="uid://cupi4hio11akb" path="res://scenes/Level_game/Arena1.lmbake" id="3_qcvkh"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_71afq"]
 
@@ -15,82 +13,16 @@ sky = SubResource("Sky_qcvkh")
 reflected_light_source = 1
 glow_enabled = true
 glow_bloom = 1.0
+fog_enabled = true
+fog_mode = 1
+fog_density = 1.0
+fog_depth_begin = 24.2
+fog_depth_end = 245.6
 
 [node name="Arena1" type="Node3D" unique_id=1507165003]
 
 [node name="player" parent="." unique_id=451295130 instance=ExtResource("2_71afq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4683759, 9.883676)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 29.047745)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1474262420]
 environment = SubResource("Environment_t0u3d")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1145215075]
-transform = Transform3D(0.27322063, -0.9540041, -0.12339567, -0.12655847, -0.16281046, 0.97850674, -0.9535897, -0.25173143, -0.1652205, 0, 0, 0)
-visible = false
-light_color = Color(0.95442706, 0.9457279, 0.9457279, 1)
-light_energy = 3.0
-light_indirect_energy = 8.0
-light_bake_mode = 1
-shadow_enabled = true
-shadow_reverse_cull_face = true
-
-[node name="LightmapGI" type="LightmapGI" parent="." unique_id=852098137]
-quality = 0
-light_data = ExtResource("3_qcvkh")
-
-[node name="MAP" parent="." unique_id=931423299 instance=ExtResource("2_qcvkh")]
-
-[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=1935518692]
-transform = Transform3D(0.98841834, 0.04816484, -0.14390793, 0.14917575, -0.13431284, 0.9796461, 0.027855821, -0.9897677, -0.13994227, -0.6097636, 44.316833, -2.5127635)
-light_energy = 173.17
-light_cull_mask = 4294967294
-spot_range = 87.25572
-spot_angle = 9.851049
-
-[node name="SpotLight3D2" type="SpotLight3D" parent="." unique_id=1847083592]
-transform = Transform3D(0.5889143, -3.5327346e-08, 0.8081955, -0.8081955, -2.574226e-08, 0.5889143, 0, -1, -4.3711385e-08, 19.4623, 39.128445, -14.849524)
-visible = false
-light_color = Color(0.95442706, 0.93668884, 0.70215017, 1)
-light_energy = 173.17
-light_indirect_energy = 3.0
-light_bake_mode = 1
-shadow_enabled = true
-shadow_blur = 2.0
-spot_range = 68.88376
-spot_angle = 16.075764
-
-[node name="SpotLight3D3" type="SpotLight3D" parent="." unique_id=1706976721]
-transform = Transform3D(0.5889143, -3.5327346e-08, 0.8081955, -0.8081955, -2.574226e-08, 0.5889143, 0, -1, -4.3711385e-08, 19.4623, 39.128445, 18.5684)
-visible = false
-light_color = Color(0.95442706, 0.93668884, 0.70215017, 1)
-light_energy = 173.17
-light_indirect_energy = 3.0
-light_bake_mode = 1
-shadow_enabled = true
-shadow_blur = 2.0
-spot_range = 68.88376
-spot_angle = 16.075764
-
-[node name="SpotLight3D4" type="SpotLight3D" parent="." unique_id=1487056692]
-transform = Transform3D(-0.5889143, -6.945365e-08, -0.80819553, -0.80819553, -3.532735e-08, 0.5889143, -6.945365e-08, 1, -3.5327346e-08, -21.668247, 39.128445, -14.849524)
-visible = false
-light_color = Color(0.95442706, 0.93668884, 0.70215017, 1)
-light_energy = 173.17
-light_indirect_energy = 3.0
-light_bake_mode = 1
-shadow_enabled = true
-shadow_blur = 2.0
-spot_range = 68.88376
-spot_angle = 16.075764
-
-[node name="SpotLight3D5" type="SpotLight3D" parent="." unique_id=1901701182]
-transform = Transform3D(-0.5889143, -6.945365e-08, -0.80819553, -0.80819553, -3.532735e-08, 0.5889143, -6.945365e-08, 1, -3.5327346e-08, -21.668247, 39.128445, 18.5684)
-visible = false
-light_color = Color(0.95442706, 0.93668884, 0.70215017, 1)
-light_energy = 173.17
-light_indirect_energy = 3.0
-light_bake_mode = 1
-shadow_enabled = true
-shadow_blur = 2.0
-spot_range = 68.88376
-spot_angle = 16.075764

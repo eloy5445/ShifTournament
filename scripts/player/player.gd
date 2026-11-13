@@ -1,6 +1,8 @@
 extends CharacterBody3D
 class_name Player
 
+signal gancho_usado # <-- NUEVA SEÑAL
+
 # --- Movimiento ---
 @export var run_speed: float = 10.0
 @export var acceleration: float = 40.0

@@ -8,6 +8,8 @@ var tiempo_actual: float = 8.0
 var juego_activo: bool = true
 var permitir_tiempo: bool = false # <-- ¡ESTA ES LA QUE FALTABA!
 
+var salto_tutorial: bool = false # <-- NUEVA VARIABLE
+
 func _process(delta: float) -> void:
 	if not juego_activo:
 		return

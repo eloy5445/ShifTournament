@@ -8,20 +8,30 @@ var is_pulling: bool = false
 func enter() -> void:
 	print("¡ENTRÉ AL ESTADO CHAIN!")
 	
-	# Comprobamos si el rayo choca con un enemigo
-	if player.chain_ray.is_colliding() and player.chain_ray.get_collider().is_in_group("enemies"):
-		print("¡LE DI AL ENEMIGO!")
-		target_position = player.chain_ray.get_collider().global_position
-		is_pulling = true
-	else:
-		print("FALLÉ EL TIRO")
-		transition_requested.emit(self, "run")
+	# Comprobamos si el rayo choca con un enemigo o un maniquí de prueba
+	if player.chain_ray.is_colliding():
+		var objetivo = player.chain_ray.get_collider()
+		
+		if objetivo.is_in_group("enemies") or objetivo.is_in_group("test_dummy"):
+			print("¡LE DI AL OBJETIVO!")
+			target_position = objetivo.global_position
+			is_pulling = true
+			
+			# --- EMITIMOS LA SEÑAL PARA EL TUTORIAL ---
+			player.gancho_usado.emit()
+			
+			# (Opcional) Aquí podrías reproducir un sonido de "cadena enganchada"
+			return
+			
+	# Si no le da a nada, fallamos el tiro
+	print("FALLÉ EL TIRO")
+	transition_requested.emit(self, "run")
 
 func exit() -> void:
 	pass
 
 func physics_update(delta: float) -> void:
-	# --- NUEVO: Cancelar la cadena con un salto ---
+	# --- Cancelar la cadena con un salto ---
 	if Input.is_action_just_pressed("jump"):
 		transition_requested.emit(self, "air")
 		return

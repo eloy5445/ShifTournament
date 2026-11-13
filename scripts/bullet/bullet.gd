@@ -4,8 +4,8 @@ extends Area3D
 @export var knockback_force: float = 15.0
 @export var damage: float = 10.0 
 @export var pickup_scene: PackedScene 
-@export var is_rocket: bool = false # <-- ESTA ERA LA QUE FALTABA
-@export var explosion_radius: float = 4.0 # <-- Y ESTA TAMBIÉN
+@export var is_rocket: bool = false 
+@export var explosion_radius: float = 4.0 
 
 var direction: Vector3 = Vector3.ZERO
 var is_from_player: bool = false
@@ -28,7 +28,8 @@ func _on_body_entered(body: Node3D) -> void:
 		# Si es un cohete, explota al chocar con CUALQUIER cosa
 		if is_rocket:
 			explode()
-		elif body.is_in_group("enemies"):
+		# --- LA LÍNEA MÁGICA ACTUALIZADA ---
+		elif body.is_in_group("enemies") or body.is_in_group("test_dummy"):
 			if body.has_method("recibir_daño"):
 				body.recibir_daño(damage, global_position, pickup_scene)
 			queue_free()
@@ -42,13 +43,18 @@ func _on_body_entered(body: Node3D) -> void:
 		elif body is StaticBody3D:
 			queue_free()
 
+# --- FUNCIÓN DE EXPLOSIÓN ---
 func explode() -> void:
 	print("¡EXPLOSIÓN DE COHETE!")
 	
+	# Buscamos a todos los enemigos en la escena
 	var enemies = get_tree().get_nodes_in_group("enemies")
 	for enemy in enemies:
+		# Si están dentro del radio de la explosión
 		if global_position.distance_to(enemy.global_position) <= explosion_radius:
 			if enemy.has_method("recibir_daño"):
 				enemy.recibir_daño(damage, enemy.global_position, pickup_scene)
 	
-	queue_free()
+	# (Aquí luego podríamos instanciar un efecto de partículas)
+	
+	queue_free() # El cohete desaparece tras explotar

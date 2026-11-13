@@ -27,6 +27,12 @@ func shoot_projectile(origin: Node3D, target_pos: Vector3, shooter_is_player: bo
 	if not bullet_scene: 
 		print("¡ERROR! Esta arma no tiene bala asignada.")
 		return
+		
+	# --- EL SEGURO MÁGICO ---
+	# Si la escena actual es nula (el juego se está reiniciando), no disparamos.
+	if get_tree().current_scene == null:
+		return
+	# ------------------------
 	
 	var bullet = bullet_scene.instantiate()
 	get_tree().current_scene.add_child(bullet)

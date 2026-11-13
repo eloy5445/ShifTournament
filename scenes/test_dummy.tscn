@@ -13,7 +13,7 @@ height = 2.008
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xdvfk"]
 albedo_color = Color(1, 0, 0, 1)
 
-[node name="TargetDummy" type="StaticBody3D" unique_id=2071369503 groups=["enemies", "test_dummy"]]
+[node name="TargetDummy" type="StaticBody3D" unique_id=2071369503 groups=["test_dummy"]]
 script = ExtResource("1_amttc")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=332601597]

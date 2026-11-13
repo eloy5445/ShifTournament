@@ -1,12 +1,9 @@
 extends Area3D
 
-# --- LA NUEVA SEÑAL ---
 signal arma_recogida 
-
 var player_in_area: bool = false
 
 func _ready() -> void:
-	# Si el área está dentro de la cámara, es porque ya es el arma equipada.
 	if get_parent().get_parent() is Camera3D:
 		set_deferred("monitoring", false)
 		queue_free()
@@ -30,14 +27,11 @@ func recoger_arma() -> void:
 	
 	var cam = player.get_node("Camera3D")
 	
-	# Borramos el arma actual
 	for child in cam.get_children():
 		if child.has_method("use_weapon"):
 			child.queue_free()
 	
-	# Cargamos la escena del arma
 	var mi_escena = load(get_parent().scene_file_path)
-	
 	if mi_escena:
 		var nueva_arma = mi_escena.instantiate()
 		cam.add_child(nueva_arma)
@@ -45,8 +39,11 @@ func recoger_arma() -> void:
 		player.current_weapon = nueva_arma 
 		print("¡Arma recogida!")
 		
-		# --- EMITIMOS LA SEÑAL ---
+		# Emitimos la señal para el tutorial
 		arma_recogida.emit()
 	
+	# --- AQUÍ ESTÁ EL REINICIO ---
+	GameManager.reiniciar_tiempo()
+	print("¡Tiempo reiniciado a 8s!")
 	
 	get_parent().queue_free()

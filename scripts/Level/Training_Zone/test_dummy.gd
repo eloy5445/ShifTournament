@@ -1,9 +1,15 @@
 extends StaticBody3D
 
 signal recibio_disparo
-signal maniqui_destruido # <-- NUEVA SEÑAL
+signal maniqui_destruido 
 
 @export var health: float = 100.0
+var max_health: float
+var posicion_inicial: Vector3
+
+func _ready() -> void:
+	max_health = health
+	posicion_inicial = global_position
 
 func recibir_daño(cantidad: float, posicion_impacto: Vector3, _pickup: PackedScene) -> void:
 	health -= cantidad
@@ -18,7 +24,16 @@ func recibir_daño(cantidad: float, posicion_impacto: Vector3, _pickup: PackedSc
 		await get_tree().create_timer(0.1).timeout
 		mat.albedo_color = color_original
 	
-	# Si se queda sin vida, avisamos y desaparecemos
+	# Si se queda sin vida, se "apaga" pero no se destruye
 	if health <= 0:
-		maniqui_destruido.emit() # <-- AVISAMOS QUE MURIÓ
-		queue_free()
+		maniqui_destruido.emit() 
+		visible = false
+		process_mode = Node.PROCESS_MODE_DISABLED # Desactiva sus colisiones y lógica
+		# No usamos queue_free() para poder revivirlo
+
+# Función para revivir al maniquí
+func revivir() -> void:
+	health = max_health
+	global_position = posicion_inicial
+	visible = true
+	process_mode = Node.PROCESS_MODE_INHERIT
